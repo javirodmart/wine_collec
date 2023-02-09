@@ -29,7 +29,7 @@ class WinesController < ApplicationController
     private
 
     def wine_params
-        params.permit(:name, :vintage, :blend, :flavor_profile, :description, :location_id, :brand_id)
+        params.permit(:name, :vintage, :blend, :flavor_profile, :description,:img_url, :location_id, :brand_id)
     end
 end
 

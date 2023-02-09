@@ -1,38 +1,166 @@
-.App {
+body {
+  background-color: #FFE5D4;
+}
+
+.navbar {
+  background: #800020;
+  height: max-content;
+  top: 0;
+  width: 100%;
+  position: fixed;
+}
+
+.brand {
+  font-size: 6vh !important;
+}
+
+.nav-link {
+  border-radius: 5vh;
+  font-size: 3vh !important;
+}
+
+.nav-link:hover {
+  background-color: #694F5D;
+  border-radius: 5vh;
+  color: #BFD3C1;
+}
+
+.active {
+  color: #FFE5D4 !important;
+}
+
+
+label {
+  padding: 2vh;
+
+}
+
+input,
+textarea {
+  border-color: #68A691;
+  border-style: solid;
+  border-radius: 20px;
+  border-width: 2px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.send {
+  background-color: #7c1a4e;
+  color: #68A691
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.sent {
+  color: #68A691;
+  text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.sent-hidden {
+  display: none;
+}
+
+.not-sent {
+  color: red;
+  text-align: center;
+}
+
+.not-sent-hidden {
+  display: none;
+}
+
+/* Blog */
+.blog {
+  text-align: center;
+}
+
+.card {
+  display: inline-block !important;
+  margin: 10px !important;
+  background-color: #FF6961 !important;
+
+  /* height: 400px !important; */
+
+
+}
+
+button,
+.btn-primary {
+  background-color: #7c1a4e !important;
+  text-decoration: none !important;
+  border-color: #7c1a4e !important;
+  margin: 5px;
+}
+
+
+
+a {
+  text-decoration: none !important;
+  color: #BFD3C1 !important;
+}
+
+
+span,
+a:hover {
+  color: #68A691;
+}
+
+
+img {
+  max-width: 900px !important;
+  height: 200px !important;
+} 
+
+.h5 {
+  margin-top: none !important;
+  margin-bottom: none !important;
+  font-weight: none !important;
+  line-height: none !important;
+  font-size: inherit !important;
+}
+
+.card-body {
+  padding: 0 !important;
+}
+
+.new-wine-card {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  text-align: center;
+  width: fit-content;
+  margin: auto;
 }
 
-.App-link {
-  color: #61dafb;
+.hide-wine-card {
+  display: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+form {
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.headers {
+  text-align: center;
+}
+
+.wine-info {
+  width: 25%;
+  position: absolute;
+  left: 10vh;
+}
+
+.wine-info-img {
+  position: absolute; /* Reposition logo from the natural layout */
+  left: 50%;
+  top: 30%;
+  width: fit-content;
+  height: fit-content;
+}
+
+.wine-info-img > img{
+  width: fit-content !important;
+  height: fit-content !important;
+  max-width: 500px !important;
+  max-height: 700px !important;
 }
