@@ -23,7 +23,7 @@ const WineCard = ({ id, name, image, vintage, deleteWine, data }) => {
  
     }
     return (
-        <Card className="card" style={{ width: '20rem' }}>
+        <div className="wine-card" style={{ width: '20rem' }}>
             <Card.Body >
                 <Card.Title id="true">{name}</Card.Title>
                 <img className="img" variant="top" src={image} />
@@ -34,7 +34,7 @@ const WineCard = ({ id, name, image, vintage, deleteWine, data }) => {
                <Link to={`/wine-info/${id}`}> <Button onClick={handleClick}> More Info</Button></Link>
                     {/* <WineInfo className="hide-wine-card" wineData={wineData} /> */}
             </Card.Body>
-        </Card>
+        </div>
     )
 }
 

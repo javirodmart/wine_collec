@@ -68,11 +68,11 @@ textarea {
 }
 
 /* Blog */
-.blog {
+.cards{
   text-align: center;
 }
 
-.card {
+.wine-card {
   display: inline-block !important;
   margin: 10px !important;
   background-color: #FF6961 !important;
@@ -130,7 +130,7 @@ img {
   margin: auto;
 }
 
-.hide-wine-card {
+.hide {
   display: none;
 }
 
@@ -163,4 +163,41 @@ form {
   height: fit-content !important;
   max-width: 500px !important;
   max-height: 700px !important;
+}
+
+.edit-button{
+  position: absolute;
+  left: 77%;
+  width: fit-content;
+  text-align: center;
+}
+.update-form{
+position: absolute;
+text-align: center;
+left: -20%;
+}
+
+.login{
+  margin-top:10vh ;
+}
+
+.each-slide-effect > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  height: 350px;
+  margin-top: 9.5vh;
+}
+
+.each-slide-effect span {
+  padding: 20px;
+  font-size: 20px;
+  background: #efefef;
+  text-align: center;
+}
+
+
+.react-slideshow-container{
+
 }
