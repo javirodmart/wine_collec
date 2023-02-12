@@ -15,15 +15,15 @@ const AllWines = ({ user, deleteWine }) => {
             .then((data) =>setWines(data));
     }, []);
     const wineArray =
-        wines.map((wines) => {
+        wines.map((wine) => {
             return(
                 <>
-                <WineCard key={wines.id} deleteWine={deleteWine}
-                id={wines.id}
-                name={wines.name}
-                vintage={wines.vintage}
-                image={wines.img_url}
-                data={wines}
+                <WineCard key={wine.id} deleteWine={deleteWine}
+                id={wine.id}
+                name={wine.name}
+                vintage={wine.vintage}
+                image={wine.img_url}
+                data={wine}
             />
             </>
            )
@@ -35,6 +35,7 @@ const AllWines = ({ user, deleteWine }) => {
         })
         setWines(updatedArray)
     }
+    console.log(wines)
     return (
         <>
         <Link to="/add_wine"><Button>Add a Wine</Button></Link>

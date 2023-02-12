@@ -3,36 +3,31 @@ import { Card, Button } from "react-bootstrap"
 import { Link, Route, Switch, useHistory } from "react-router-dom"
 import WineInfo from "./WineInfo"
 
-const WineCard = ({ id, name, image, vintage, deleteWine, data }) => {
-    const [isVintage, setIsVintage] = useState(vintage)
-    const [wineData, setWineData] = useState([])
-    if (isVintage === 0) {
-        setIsVintage("Not Vintage")
-    }
+const BrandCard = ({ id, name, image, est, deleteBrand }) => {
+    const [BrandData, setBrandData] = useState([])
+    
 
 
     const handleDelete = () => {
-        fetch(`wines/${id}`, {
+        fetch(`brands/${id}`, {
             method: "DELETE"
         })
-        deleteWine(id)
+        deleteBrand(id)
     }
     const history = useHistory()
-   
     return (
-        <div className="wine-card" style={{ width: '20rem' }}>
+        <div className="brand-card" style={{ width: '20rem' }}>
             <Card.Body >
                 <Card.Title id="true">{name}</Card.Title>
                 <img className="img" variant="top" src={image} />
                 <Card.Text>
-                    {isVintage}
+                    {est}
                 </Card.Text>
                 <Button onClick={handleDelete} >Delete</Button>
-               <Link to={`/wine-info/${id}`}> <Button > More Info</Button></Link>
-                    {/* <WineInfo className="hide-wine-card" wineData={wineData} /> */}
+               <Link to={`/brand-info/${id}`}> <Button> More Info</Button></Link>
             </Card.Body>
         </div>
     )
 }
 
-export default WineCard
+export default BrandCard

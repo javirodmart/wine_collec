@@ -19,7 +19,7 @@ const Header = ({user,updateUser}) => {
         },
         {
             id:3,
-            path: "/add_brand",
+            path: "/all_brands",
             name: "Brand"
         },
         {

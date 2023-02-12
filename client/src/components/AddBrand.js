@@ -7,8 +7,9 @@ const AddBrand = ({ Brand, brand, location, handelNewBrand, }) => {
     const history = useHistory()
     const [formData, setFormData] = useState({
         name: '',
-        description: "",
-        est: ""
+        description: '',
+        est: '',
+        img_url:''
     })
     const [errors, setErrors] = useState([]);
     const [newBrand, setNewBrand] = useState([])
@@ -35,7 +36,7 @@ const AddBrand = ({ Brand, brand, location, handelNewBrand, }) => {
         })
             .then(res => {
                 if (res.ok) {
-                    res.json().then((data) => (setNewBrand(data),setHide("new-Brand-card")))
+                    res.json().then((data) => (handelNewBrand(data),setNewBrand(data),setHide("new-Brand-card")))
                 } else {
                     res.json().then((errorData) => setErrors(errorData.errors))
                 }
@@ -60,7 +61,9 @@ console.log(id)
                 <br></br>
                 <h5>est:</h5>
                 <input type="text" name="est" placeholder="est year" value={formData.est} onChange={handleChange} />
-               
+                <h5>Image:</h5>
+                <input type="text" name="img_url" placeholder="image" value={formData.img_url} onChange={handleChange} />
+                <br></br>
                 <br></br>
                 {errors.length > 0 && (
                     <ul style={{ color: "red" }}>

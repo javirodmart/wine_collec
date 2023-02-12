@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react"
 import { Button } from "react-bootstrap"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom"
-const WineInfo = ({ wineData, brand, location, onUpdateItem }) => {
+const BrandInfo = ({ wineData,  location, deleteBrand,onUpdateItem }) => {
     const { id } = useParams()
-    const [wine, setWine] = useState([])
+    const [brand, setBrand] = useState([])
     const [isVintage, setIsVintage] = useState([])
     const [errors, setErrors] = useState([]);
     const [newWine, setNewWine] = useState([])
@@ -12,10 +12,10 @@ const WineInfo = ({ wineData, brand, location, onUpdateItem }) => {
     const [brandName,setBrandName] = useState([])
 
     useEffect(() => {
-        fetch(`/wines/${id}`)
+        fetch(`/brands/${id}`)
             .then((r) => r.json())
             .then((data) => (
-                setWine(data),
+                setBrand(data),
                 setBrandName(data.brand.name),
                 setIsVintage(data.vintage),
                 setFormData(data),
@@ -63,7 +63,7 @@ const WineInfo = ({ wineData, brand, location, onUpdateItem }) => {
         })
             .then(res => {
                 if (res.ok) {
-                    res.json().then((data) => (setWine(data), setNewWine(data), setHide("hide")))
+                    res.json().then((data) => (setBrand(data), setNewWine(data), setHide("hide")))
                 } else {
                    
                 }
@@ -71,10 +71,11 @@ const WineInfo = ({ wineData, brand, location, onUpdateItem }) => {
     }
 
     const handleDelete = () => {
-        fetch(`wines/${id}`, {
+        fetch(`brands/${id}`, {
             method: "DELETE"
         })
-        history.push(`/all_wines`)
+        deleteBrand(id)
+        history.push(`/all_brands`)
     }
 
     function handleHide() {
@@ -84,6 +85,7 @@ const WineInfo = ({ wineData, brand, location, onUpdateItem }) => {
             setHide("hide")
         }
     }
+    console.log(brand)
     return (
         <>
             <div className="edit-button" >
@@ -109,19 +111,7 @@ const WineInfo = ({ wineData, brand, location, onUpdateItem }) => {
                     <input type="text" name="img_url" placeholder="Image url" value={formData.img_url} onChange={handleChange} />
                     <br></br>
                     <label htmlFor="brand_id">Brand:</label>
-                    <select
-                        id="brand_id"
-                        value={formData.brand_id}
-                        name="brand_id"
-                        onChange={handleChange}
-                    >
-                        <option value="">Select Brand...</option>
-                        {brand.map((brands) => (
-                            <option key={brands.id} value={brands.id}>
-                                {brands.name}
-                            </option>
-                        ))}
-                    </select>
+                    
 
                     <label htmlFor="location_id">Location:</label>
                     <select
@@ -149,28 +139,23 @@ const WineInfo = ({ wineData, brand, location, onUpdateItem }) => {
                     <Button onClick={handleDelete} >Delete</Button>
                 </form>
             </div>
-            <h1 className="headers">Wine Info</h1>
+            <h1 className="headers">Brand Info</h1>
             <div className="wine-info">
-                <h3>{wine.name}</h3>
+                <h3>{brand.name}</h3>
                 <br></br>
-                <h3>Brand:</h3>
-                <h3>{brandName}</h3>
+                <h3>EST:</h3>
+                <h3>{brand.est}</h3>
                 <br></br>
-                <h4>Vintage: </h4>
+                <h4>Location: </h4>
                 <h5>{isVintage}</h5>
                 <br></br>
-                <h4>Blend: </h4>
-                <h5>{wine.blend}</h5>
-                <br></br>
-                <h4>Flavor Profile: </h4>
-                <h5>{wine.flavor_profile}</h5>
                 <br></br>
                 <br></br>
-                <h4>A Little About The Wine </h4>
-                <h5>{wine.description}</h5>
+                <h4>A Little About The Brand </h4>
+                <h5>{brand.description}</h5>
             </div>
-            <div className="wine-info-img" >
-                <img src={wine.img_url} />
+            <div className="brand-info-img" >
+                <img src={brand.img_url} />
             </div>
 
 
@@ -178,4 +163,4 @@ const WineInfo = ({ wineData, brand, location, onUpdateItem }) => {
     )
 }
 
-export default WineInfo
+export default BrandInfo

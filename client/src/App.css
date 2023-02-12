@@ -76,9 +76,16 @@ textarea {
   display: inline-block !important;
   margin: 10px !important;
   background-color: #FF6961 !important;
+}
 
-  /* height: 400px !important; */
+.brand-card {
+  display: inline-block !important;
+  margin: 10px !important;
+  background-color: #FF6961 !important;
+}
 
+ img.img{
+  max-width: 33vh !important;
 
 }
 
@@ -158,6 +165,14 @@ form {
   height: fit-content;
 }
 
+.brand-info-img {
+  position: absolute; /* Reposition logo from the natural layout */
+  left: 40%;
+  top: 30%;
+  width: fit-content;
+  height: fit-content;
+}
+
 .wine-info-img > img{
   width: fit-content !important;
   height: fit-content !important;
@@ -195,9 +210,4 @@ left: -20%;
   font-size: 20px;
   background: #efefef;
   text-align: center;
-}
-
-
-.react-slideshow-container{
-
 }
