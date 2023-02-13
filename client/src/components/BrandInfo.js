@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Button } from "react-bootstrap"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom"
-const BrandInfo = ({ wineData,  location, deleteBrand,onUpdateItem }) => {
+const BrandInfo = ({ brands,  location, deleteBrand,onUpdateItem }) => {
     const { id } = useParams()
     const [brand, setBrand] = useState([])
     const [isVintage, setIsVintage] = useState([])
@@ -16,10 +16,7 @@ const BrandInfo = ({ wineData,  location, deleteBrand,onUpdateItem }) => {
             .then((r) => r.json())
             .then((data) => (
                 setBrand(data),
-                setBrandName(data.brand.name),
-                setIsVintage(data.vintage),
-                setFormData(data),
-                console.log(data.brand.name)
+                setFormData(data)
             ));
     }, []);
     if (isVintage === 0) {
@@ -54,7 +51,7 @@ const BrandInfo = ({ wineData,  location, deleteBrand,onUpdateItem }) => {
         e.preventDefault()
         const NewWine = formData
         console.log(formData)
-        fetch(`/wines/${id}`, {
+        fetch(`/brands/${id}`, {
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json'
@@ -63,7 +60,7 @@ const BrandInfo = ({ wineData,  location, deleteBrand,onUpdateItem }) => {
         })
             .then(res => {
                 if (res.ok) {
-                    res.json().then((data) => (setBrand(data), setNewWine(data), setHide("hide")))
+                    res.json().then((data) => (setBrand(data), setNewWine(data), setHide("hide"), deleteBrand(data)))
                 } else {
                    
                 }
@@ -74,7 +71,6 @@ const BrandInfo = ({ wineData,  location, deleteBrand,onUpdateItem }) => {
         fetch(`brands/${id}`, {
             method: "DELETE"
         })
-        deleteBrand(id)
         history.push(`/all_brands`)
     }
 
@@ -89,44 +85,19 @@ const BrandInfo = ({ wineData,  location, deleteBrand,onUpdateItem }) => {
     return (
         <>
             <div className="edit-button" >
-                <Button onClick={handleHide}> Edit Wine </Button>
+                <Button onClick={handleHide}> Edit Brand </Button>
 
                 <form className={hide} onSubmit={handleSubmit}>
                     <h2>Edit Wine</h2>
                     <h5>Name:</h5>
                     <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
                     <br></br>
-                    <h5>Vintage:</h5>
-                    <input type="number" name="vintage" placeholder="Year" value={formData.vintage} onChange={handleChange} />
+                    <h5>Description:</h5>
+                    <textarea type="text" name="description" placeholder="Description" value={formData.description} onChange={handleChange} />
                     <br></br>
-                    <h5>Blend:</h5>
-                    <input type="text" name="blend" placeholder="Blend/Notes" value={formData.blend} onChange={handleChange} />
+                    <h5>Est:</h5>
+                    <input type="number" name="est" placeholder="year" value={formData.est} onChange={handleChange} />
                     <br></br>
-                    <h5>Flavor Profile</h5>
-                    <input type="text" name="flavor_profile" placeholder="Flavor Profile" value={formData.flavor_profile} onChange={handleChange} />
-                    <br></br>
-                    <h5>Description</h5>
-                    <input type="text" name="description" placeholder="Description" value={formData.description} onChange={handleChange} />
-                    <h5>Image Url</h5>
-                    <input type="text" name="img_url" placeholder="Image url" value={formData.img_url} onChange={handleChange} />
-                    <br></br>
-                    <label htmlFor="brand_id">Brand:</label>
-                    
-
-                    <label htmlFor="location_id">Location:</label>
-                    <select
-                        id="location_id"
-                        value={formData.location_id}
-                        name="location_id"
-                        onChange={handleChange}
-                    >
-                        <option value="">Select Location...</option>
-                        {location.map((locations) => (
-                            <option key={locations.id} value={locations.id}>
-                                {locations.state}
-                            </option>
-                        ))}
-                    </select>
                     <br></br>
                     {errors.length > 0 && (
                         <ul style={{ color: "red" }}>

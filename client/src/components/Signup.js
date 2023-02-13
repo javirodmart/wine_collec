@@ -4,19 +4,23 @@ import { useHistory } from 'react-router-dom'
 
 function SignUp({updateUser}) {
     const [formData, setFormData] = useState({
-        name: '',
+        first_name:'',
+        last_name:'',
+        username: '',
         email: '',
         password: ''
     })
     const [errors, setErrors] = useState([])
     const history = useHistory()
 
-    const { name, email, password } = formData
+    const {first_name, last_name, username, email, password } = formData
 
     function onSubmit(e) {
         e.preventDefault()
         const user = {
-            name,
+            first_name,
+            last_name,
+            username,
             email,
             password
         }
@@ -53,10 +57,22 @@ function SignUp({updateUser}) {
 
             <form onSubmit={onSubmit}>
                 <h2>Sign Up!</h2>
+
                 <label>
-                    Name
+                    First Name
                 </label>
-                <input type='text' name='name' value={name} onChange={handleChange} />
+                <input type='text' name='first_name' value={first_name} onChange={handleChange} />
+<br></br>
+                <label>
+                    Last Name
+                </label>
+                <input type='text' name='last_name' value={last_name} onChange={handleChange} />
+<br></br>
+
+                <label>
+                    UserName
+                </label>
+                <input type='text' name='username' value={username} onChange={handleChange} />
 <br></br>
                 <label>
                     Email

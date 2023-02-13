@@ -5,10 +5,18 @@ import BrandCard from "./BrandCard"
 import WineInfo from "./WineInfo"
 
 
-const AllWines = ({ brand ,deleteBrand, handelNewBrand}) => {
+const AllWines = ({ deleteBrand, handelNewBrand}) => {
     const { id } = useParams()
     const [wines, setWines] = useState([])
+    const [brand,setBrand] = useState([])
     console.log(brand)
+
+    useEffect(() => {
+        fetch("/brands")
+          .then((r) => r.json())
+          .then((data) => setBrand(data));
+      }, []);
+
     const wineArray =
         brand.map((brands) => {
             return (

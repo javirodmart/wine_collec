@@ -16,6 +16,7 @@ const AddBrand = ({ Brand, brand, location, handelNewBrand, }) => {
     const [hide,setHide] = useState("hide")
     const [id,setId] = useState([])
 
+
     const handleChange = (e) => {
         e.preventDefault()
         const { name, value } = e.target
@@ -83,7 +84,7 @@ console.log(id)
                             <Card.Text>
                                 {newBrand.isVintage}
                             </Card.Text>
-                            <Link to={`/Brand-info/${newBrand.id}`}> <Button> More Info</Button></Link>
+                            <Link to={`/brand-info/${newBrand.id}`}> <Button> More Info</Button></Link>
                         </Card.Body>
                     </Card>
                     </div>

@@ -6,19 +6,19 @@ import WineSlide from './WineSlide'
 
 function Login({ updateUser }) {
     const [formData, setFormData] = useState({
-        name: '',
+        username: '',
         email: '',
         password: ''
     })
     const [errors, setErrors] = useState([])
     const history = useHistory()
 
-    const { name, password } = formData
+    const { username, password } = formData
 
     function onSubmit(e) {
         e.preventDefault()
         const user = {
-            name,
+            username,
             password
         }
         // Logs in user
@@ -50,12 +50,13 @@ function Login({ updateUser }) {
                 <h1 className='headers'>Welcome Back To Your Virtual Wine Cellar </h1>
             </div>
             <form onSubmit={onSubmit}>
+                <h2>Sign In</h2>
                 <label>
                     Username
 
                 </label>
                 <br></br>
-                <input type='text' name='name' value={name} onChange={handleChange} />
+                <input type='text' name='username' value={username} onChange={handleChange} />
                 <br></br>
                 <label>
                     Password

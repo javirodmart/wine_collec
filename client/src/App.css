@@ -35,13 +35,13 @@ label {
 
 }
 
-input,
-textarea {
+input, textarea {
   border-color: #68A691;
   border-style: solid;
   border-radius: 20px;
   border-width: 2px;
   text-align: center;
+  width: fit-content;
 }
 
 .send {
@@ -189,11 +189,19 @@ form {
 .update-form{
 position: absolute;
 text-align: center;
-left: -20%;
+left: 0%;
+width: fit-content;
 }
 
 .login{
   margin-top:10vh ;
+}
+.logout {
+  width: fit-content;
+  color:#800020;
+  height: fit-content;
+  background-color: #efefef !important;
+  border-radius: 10px;
 }
 
 .each-slide-effect > div {
@@ -210,4 +218,15 @@ left: -20%;
   font-size: 20px;
   background: #efefef;
   text-align: center;
+}
+
+textarea{
+  width: 40vh;
+  height: 30vh;
+}
+
+.dashboard{
+  text-align: center;
+  width: fit-content;
+  margin: auto;
 }

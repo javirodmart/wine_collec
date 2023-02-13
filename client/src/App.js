@@ -1,7 +1,7 @@
-import { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import './App.css';
 import Header from './components/Header';
-import { Route, Switch,useParams } from 'react-router-dom';
+import { Route, Switch,useParams,useHistory } from 'react-router-dom';
 import AllWines from './components/AllWines';
 import AllBrands from './components/AllBrands'
 import AddWine from './components/AddWine';
@@ -13,7 +13,7 @@ import SignUp from './components/Signup';
 import Login from './components/Login';
 import GuestHeader from './components/GuestHeader';
 import Dashboard from './components/Dashboard';
-export const UserContext = createContext([]);
+const UserContext = React.createContext;
 
 function App() {
   const [wine, setWine] = useState([])
@@ -22,6 +22,8 @@ function App() {
   const [user, setUser] = useState([]);
   const { id } = useParams()
   const [wineId,serWineId] = useState([])
+  const history = useHistory()
+  const [admin,setAdmin] = useState([])
 
  
 
@@ -48,11 +50,14 @@ function App() {
     // auto-login
     fetch("/authorized_user").then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
-      }
+        r.json().then((user) => setUser(user),setAdmin(user.admin));
+      }else {
+        setUser(null)
+        history.push("/login")
+    }
     });
   }, []);
-
+  
   const updateUser = (user) => setUser(user)
 
   const handelNewWine = (addNewWine) => {
@@ -127,7 +132,7 @@ function deleteBrand(deleteBrand) {
             <Dashboard user={user}/>
           </Route>
           <Route path="/all_wines">
-            <AllWines user={user} wine={wine} />
+            <AllWines admin={admin} user={user} wine={wine} />
           </Route>
           <Route path="/all_brands">
             <AllBrands user={user} brand={brand} deleteBrand={deleteBrand} />

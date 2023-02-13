@@ -3,14 +3,14 @@ import { useParams } from "react-router-dom"
 
 const Dashboard = (user) => {
     const { name } = useParams()
-    console.log(user.user.name)
+    console.log(user)
 
 
     return (
         <>
-            <div>
-                <h1>Welcome</h1>
-                <h1>{user.user.name}</h1>
+            <div className="dashboard">
+                <h1> {user.user.first_name}`s Wine Cellar</h1>
+                <h1></h1>
             </div>
 
         </>

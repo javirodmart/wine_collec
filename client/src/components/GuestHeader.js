@@ -26,7 +26,7 @@ const GuestHeader = ({ user, updateUser }) => {
                     <Nav className="justify-content-end ms-auto" activeKey="/home">
                         <Nav.Item  className="nav-link">
                             <NavLink onClick={handleClick} className="nav-link" to={login ? "/login" :"/signup"}>
-                                {login ? "Login!": "Signup!"}
+                                {login ? "SIGN IN!": "SIGN UP!"}
                             </NavLink>
                         </Nav.Item>
                     </Nav>

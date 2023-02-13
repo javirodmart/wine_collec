@@ -9,10 +9,10 @@ const Header = ({user,updateUser}) => {
     const navInfo = [
         {
             id: 1,
-            path: '/',
+            path: `/dashboard/${user.id}`,
             name: 'Home'
         },
-        {
+         {
             id:2,
             path: `/all_wines`,
             name: 'Wines'
@@ -38,7 +38,7 @@ const Header = ({user,updateUser}) => {
         .then(res =>{
           if(res.ok){
             updateUser(null)
-            history.push('/')
+            history.push('/login')
           }
         })
         updateUser(null)
@@ -62,7 +62,7 @@ const Header = ({user,updateUser}) => {
                                 </Nav.Item>
                             </>
                         ))}
-                        <Button onClick={handleLogOut}>Logout</Button>
+                        <button className="logout" onClick={handleLogOut}>Sign Out</button>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
