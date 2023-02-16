@@ -1,11 +1,13 @@
 import { useState } from "react"
 import { Card, Button } from "react-bootstrap"
 import { Link, Route, Switch, useHistory } from "react-router-dom"
+import { FaBeer } from 'react-icons/fa';
+
 import ReactStars from 'react-stars'
 import { render } from 'react-dom'
 
 
-const WineCard = ({ id ,name ,vintage ,image ,blend ,flavor_profile ,description ,location_id ,brand_id ,deleteWine, userId,user,handleNewWine }) => {
+const WineCard = ({ id, name, vintage, image, blend, flavor_profile, description, location_id, brand_id, deleteWine, userId, user, handleNewWine }) => {
     const [isVintage, setIsVintage] = useState(vintage)
     const [wineData, setWineData] = useState([])
     const [rating, setRating] = useState(0);
@@ -15,7 +17,7 @@ const WineCard = ({ id ,name ,vintage ,image ,blend ,flavor_profile ,description
         vintage: vintage,
         blend: blend,
         flavor_profile: flavor_profile,
-        description:description,
+        description: description,
         img_url: image,
         brand_id: brand_id,
         location_id: location_id,
@@ -51,7 +53,7 @@ const WineCard = ({ id ,name ,vintage ,image ,blend ,flavor_profile ,description
         deleteWine(id)
     }
     const history = useHistory()
-    
+
 
     return (
         <div className="wine-card" style={{ width: '20rem' }}>
@@ -61,11 +63,11 @@ const WineCard = ({ id ,name ,vintage ,image ,blend ,flavor_profile ,description
                 <Card.Text>
                     {isVintage}
                 </Card.Text>
-                
-                {user.admin ? <Button onClick={handleDelete} >Delete</Button> : null}
 
-                <Link to={`/wine-info/${id}`}> <Button> More Info</Button></Link>
-                <Link /* to={`/dashboard/${user.id}/`}*/ > <Button onClick={handleAdd} > Add</Button></Link>
+                {user.admin ? <Button onClick={handleDelete} ><i class="fa fa-trash-o"></i></Button> : null}
+
+                <Link to={`/wine-info/${id}`}> <Button><i class="fa fa-info-circle" style={{fontsize: + "36px"}}></i></Button></Link>
+                <Link /* to={`/dashboard/${user.id}/`}*/ > <Button onClick={handleAdd} > <i class="fa fa-plus" style={{fontsize: + "36px"}}></i> </Button></Link>
                 {/* <WineInfo className="hide-wine-card" wineData={wineData} /> */}
             </Card.Body>
         </div>
