@@ -6,7 +6,7 @@ class WinesController < ApplicationController
 
     def show
         wines =  Wine.find(params[:id])
-        render json: wines,except: [:created_at, :updated_at], status: :ok
+        render json:wines, serializer: WineWithBrandSerializer 
     end
 
     def create

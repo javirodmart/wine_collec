@@ -84,7 +84,7 @@ console.log(id)
                             <Card.Text>
                                 {newBrand.isVintage}
                             </Card.Text>
-                            <Link to={`/brand-info/${newBrand.id}`}> <Button> More Info</Button></Link>
+                            <Link to={`/location-info/${newBrand.id}`}> <Button> More Info</Button></Link>
                         </Card.Body>
                     </Card>
                     </div>

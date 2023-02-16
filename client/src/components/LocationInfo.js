@@ -2,26 +2,23 @@ import React, { useState, useEffect } from "react"
 import { Button } from "react-bootstrap"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom"
-const BrandInfo = ({ brands, user, location, onUpdateItem }) => {
+const LocationInfo = ({ brands, user, onUpdateItem }) => {
     const { id } = useParams()
-    const [brand, setBrand] = useState([])
-    const [isVintage, setIsVintage] = useState([])
+    const [location, setLocation] = useState([])
     const [errors, setErrors] = useState([]);
     const [newWine, setNewWine] = useState([])
     const [hide, setHide] = useState("hide")
     const [brandName, setBrandName] = useState([])
 
     useEffect(() => {
-        fetch(`/brands/${id}`)
+        fetch(`/locations/${id}`)
             .then((r) => r.json())
             .then((data) => (
-                setBrand(data),
+                setLocation(data),
                 setFormData(data)
             ));
     }, []);
-    if (isVintage === 0) {
-        setIsVintage("Not Vintage")
-    }
+
 
 
 
@@ -49,18 +46,18 @@ const BrandInfo = ({ brands, user, location, onUpdateItem }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const NewWine = formData
+        const updatedLocation = formData
         console.log(formData)
-        fetch(`/brands/${id}`, {
+        fetch(`/locations/${id}`, {
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(NewWine),
+            body: JSON.stringify(updatedLocation),
         })
             .then(res => {
                 if (res.ok) {
-                    res.json().then((data) => (setBrand(data), setNewWine(data), setHide("hide")))
+                    res.json().then((data) => (setLocation(data), setHide("hide")))
                 } else {
 
                 }
@@ -68,10 +65,10 @@ const BrandInfo = ({ brands, user, location, onUpdateItem }) => {
     }
 
     const handleDelete = () => {
-        fetch(`brands/${id}`, {
+        fetch(`locations/${id}`, {
             method: "DELETE"
         })
-        history.push(`/all_brands`)
+        history.push(`/all_locations`)
     
     }
 
@@ -82,22 +79,25 @@ const BrandInfo = ({ brands, user, location, onUpdateItem }) => {
             setHide("hide")
         }
     }
-    console.log(brand)
+    console.log(location)
     return (
         <> {user.admin ?
             <div className="edit-button" >
-            <Button onClick={handleHide}> Edit Brand </Button>
+            <Button onClick={handleHide}> Edit Location </Button>
 
             <form className={hide} onSubmit={handleSubmit}>
-                <h2>Edit Wine</h2>
-                <h5>Name:</h5>
-                <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
+                <h2>Edit Location</h2>
+                <h5>Country:</h5>
+                <input type="text" name="region" placeholder="Region" value={formData.region} onChange={handleChange} />
+                <br></br>
+                <h5>Region:</h5>
+                <input type="text" name="country" placeholder="Country" value={formData.country} onChange={handleChange} />
+                <br></br>
+                <h5>Region:</h5>
+                <input type="text" name="img_url" placeholder="Image" value={formData.img_url} onChange={handleChange} />
                 <br></br>
                 <h5>Description:</h5>
                 <textarea type="text" name="description" placeholder="Description" value={formData.description} onChange={handleChange} />
-                <br></br>
-                <h5>Est:</h5>
-                <input type="number" name="est" placeholder="year" value={formData.est} onChange={handleChange} />
                 <br></br>
                 <br></br>
                 {errors.length > 0 && (
@@ -117,21 +117,19 @@ const BrandInfo = ({ brands, user, location, onUpdateItem }) => {
            
             <h1 className="headers">Brand Info</h1>
             <div className="wine-info">
-                <h3>{brand.name}</h3>
+                <h3>{location.region}</h3>
                 <br></br>
-                <h3>EST:</h3>
-                <h3>{brand.est}</h3>
+                <h3>Country:</h3>
+                <h3>{location.country}</h3>
                 <br></br>
-                <h4>Location: </h4>
-                <h5>{isVintage}</h5>
                 <br></br>
                 <br></br>
                 <br></br>
                 <h4>A Little About The Brand </h4>
-                <h5>{brand.description}</h5>
+                <h5>{location.description}</h5>
             </div>
             <div className="brand-info-img" >
-                <img src={brand.img_url} />
+                <img src={location.img_url} />
             </div>
 
 
@@ -139,4 +137,4 @@ const BrandInfo = ({ brands, user, location, onUpdateItem }) => {
     )
 }
 
-export default BrandInfo
+export default LocationInfo

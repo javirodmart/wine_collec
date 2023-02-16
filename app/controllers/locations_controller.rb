@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
     def index
-        render json: Location.all,except: [:created_at, :updated_at]
+        render json: Location.all
     end
 
     def show
@@ -28,6 +28,6 @@ class LocationsController < ApplicationController
     private
 
     def location_params
-        params.permit(:country, :state, :city)
+        params.permit(:country, :region, :description,:img_url)
     end
 end

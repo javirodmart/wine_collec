@@ -10,27 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_09_033914) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_16_211108) do
   create_table "brands", force: :cascade do |t|
     t.string "name"
     t.integer "est"
     t.text "description"
+    t.string "img_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "locations", force: :cascade do |t|
     t.string "country"
-    t.string "state"
-    t.string "city"
+    t.string "region"
+    t.string "description"
+    t.string "img_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "my_wines", force: :cascade do |t|
     t.string "name"
+    t.integer "vintage"
+    t.text "blend"
+    t.string "flavor_profile"
+    t.text "description"
+    t.string "img_url"
+    t.integer "brand_id"
+    t.integer "location_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["brand_id"], name: "index_my_wines_on_brand_id"
+    t.index ["location_id"], name: "index_my_wines_on_location_id"
+    t.index ["user_id"], name: "index_my_wines_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "username"
     t.string "email"
     t.string "password_digest"
+    t.boolean "admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

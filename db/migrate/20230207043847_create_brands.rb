@@ -4,6 +4,7 @@ class CreateBrands < ActiveRecord::Migration[7.0]
       t.string :name
       t.integer :est
       t.text :description
+      t.string :img_url
 
       t.timestamps
     end

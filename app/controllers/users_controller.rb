@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
-    
-
+    skip_before_action :authorized_user, only:[:create]
+    def index
+        render  json: User.all
+    end
     def show
-        user = User.find(session[:id])
-        render json: user, status: :ok
+        render json: current_user, status: :ok
     end
 
     def create
@@ -11,18 +12,17 @@ class UsersController < ApplicationController
         session[:user_id] = user.id
         render json: user, status: :created
     end
-    def login
-        user = User.find_by(name:params[:id])
-        if user&.authenticate(params[:password])
-            render json user, status: :ok
-        else 
-            rebder json: {errors: "Incorrect Username or Password"}, status: :unauthorized
-        end
+    
+
+    def show_wines
+        wines = MyWine.where(user_id: params[:id])
+        render json: wines
     end
 
+   
     private 
 
     def user_params
-        params.permit(:name,:email,:password)
+        params.permit(:first_name, :last_name, :username, :email,:password)
     end
 end

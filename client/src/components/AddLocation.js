@@ -3,22 +3,19 @@ import { Card, Button } from "react-bootstrap"
 import { Link, Redirect, useHistory , useParams} from "react-router-dom"
 
 
-const AddWine = ({ wine, brand, location, handelNewWine, }) => {
+const AddBrand = ({ location, handelNewLocation, }) => {
     const history = useHistory()
     const [formData, setFormData] = useState({
-        name: '',
-        vintage: 0,
-        blend: "",
-        flavor_profile: "",
-        description: "",
-        img_url: "",
-        brand_id: 0,
-        location_id: 0
+        country: '',
+        region: '',
+        description: '',
+        img_url:""
     })
     const [errors, setErrors] = useState([]);
-    const [newWine, setNewWine] = useState([])
+    const [newLocation, setNewLocation] = useState([])
     const [hide,setHide] = useState("hide")
     const [id,setId] = useState([])
+
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -29,80 +26,47 @@ const AddWine = ({ wine, brand, location, handelNewWine, }) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        const NewWine = formData
+        const newLocation = formData
         console.log(formData)
-        fetch("/wines", {
+        fetch("/locations", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(NewWine),
+            body: JSON.stringify(newLocation),
         })
             .then(res => {
                 if (res.ok) {
-                    res.json().then((data) => (handelNewWine(data), setNewWine(data),setHide("new-wine-card")))
+                    res.json().then((data) => (setNewLocation(data),setHide("new-Brand-card"),handelNewLocation(data)))
                 } else {
                     res.json().then((errorData) => setErrors(errorData.errors))
                 }
             })
-            setId(NewWine.id)
+            setId(formData.id)
     }
-console.log(id)
-    
+
     function handleHide(){
-        setHide("new-wine-card")
+        setHide("new-Brand-card")
     }
-    console.log(newWine.id)
+console.log(newLocation)
     return (
         <>
-            <h2>New Wine</h2>
+            <h2>New Location</h2>
             <form onSubmit={handleSubmit}>
-                <h5>Name:</h5>
-                <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
+                <h5>Country:</h5>
+                <input type="text" name="country" placeholder="Country" value={formData.country} onChange={handleChange} />
                 <br></br>
-                <h5>Vintage:</h5>
-                <input type="text" name="vintage" placeholder="Year" value={formData.vintage} onChange={handleChange} />
+                <h5>Region:</h5>
+                <input type="text" name="region" placeholder="Region" value={formData.region} onChange={handleChange} />
+                <h5>Description:</h5>
+                <input type="text" name="description" placeholder="description" value={formData.description} onChange={handleChange} />
                 <br></br>
-                <h5>Blend:</h5>
-                <input type="text" name="blend" placeholder="Blend/Notes" value={formData.blend} onChange={handleChange} />
+                <h5>Image:</h5>
+                <input type="text" name="img_url" placeholder="Image Url" value={formData.img_url} onChange={handleChange} />
                 <br></br>
-                <h5>Flavor Profile</h5>
-                <input type="text" name="flavor_profile" placeholder="Flavor Profile" value={formData.flavor_profile} onChange={handleChange} />
+                {/* <h5>Image:</h5>
+                <input type="text" name="img_url" placeholder="image" value={formData.img_url} onChange={handleChange} /> */}
                 <br></br>
-                <h5>Description</h5>
-                <input type="text" name="description" placeholder="Description" value={formData.description} onChange={handleChange} />
-                <h5>Image Url</h5>
-                <input type="text" name="img_url" placeholder="Image url" value={formData.img_url} onChange={handleChange} />
-                <br></br>
-                <label htmlFor="brand_id">Brand:</label>
-                <select
-                    id="brand_id"
-                    value={formData.brand_id}
-                    name="brand_id"
-                    onChange={handleChange}
-                >
-                    <option value="">Select Brand...</option>
-                    {brand.map((brands) => (
-                        <option key={brands.id} value={brands.id}>
-                            {brands.name}
-                        </option>
-                    ))}
-                </select>
-
-                <label htmlFor="location_id">Location:</label>
-                <select
-                    id="location_id"
-                    value={formData.location_id}
-                    name="location_id"
-                    onChange={handleChange}
-                >
-                    <option value="">Select Location...</option>
-                    {location.map((locations) => (
-                        <option key={locations.id} value={locations.id}>
-                            {locations.state}
-                        </option>
-                    ))}
-                </select>
                 <br></br>
                 {errors.length > 0 && (
                     <ul style={{ color: "red" }}>
@@ -111,17 +75,18 @@ console.log(id)
                         ))}
                     </ul>
                 )}
+                <br></br>
                 <button>Submit</button>
                 {
                     <div className={hide}>
                     <Card  style={{ width: '20rem' }}>
                         <Card.Body >
-                            <Card.Title>{newWine.name}</Card.Title>
-                            <img className="img" variant="top" src={newWine.img_url} />
+                            <Card.Title>{newLocation.region}</Card.Title>
+                            <img className="img" variant="top" src={newLocation.img_url} />
                             <Card.Text>
-                                {newWine.isVintage}
+                                {newLocation.country}
                             </Card.Text>
-                            <Link to={`/wine-info/${newWine.id}`}> <Button> More Info</Button></Link>
+                            <Link to={`/location-info/${newLocation.id}`}> <Button> More Info</Button></Link>
                         </Card.Body>
                     </Card>
                     </div>
@@ -130,4 +95,4 @@ console.log(id)
         </>
     )
 }
-export default AddWine
+export default AddBrand

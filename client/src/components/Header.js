@@ -24,7 +24,7 @@ const Header = ({user,updateUser}) => {
         },
         {
             id:3,
-            path: "/add_location",
+            path: "/all_locations",
             name: "Location"
         }
     ]

@@ -230,3 +230,16 @@ textarea{
   width: fit-content;
   margin: auto;
 }
+
+#rating-button {
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  cursor: pointer !important;
+}
+.on {
+  color: #000 !important;
+}
+.off {
+  color: #ccc !important;
+}

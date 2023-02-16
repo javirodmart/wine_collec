@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Button } from "react-bootstrap"
 import { useParams } from "react-router-dom"
 import { useHistory } from "react-router-dom"
-const WineInfo = ({ wineData, brand, location, onUpdateItem }) => {
+const WineInfo = ({ wineData,user , brand, location, onUpdateItem }) => {
     const { id } = useParams()
     const [wine, setWine] = useState([])
     const [isVintage, setIsVintage] = useState([])
@@ -86,7 +86,8 @@ const WineInfo = ({ wineData, brand, location, onUpdateItem }) => {
     }
     return (
         <>
-            <div className="edit-button" >
+        {user.admin ?
+                <div className="edit-button" >
                 <Button onClick={handleHide}> Edit Wine </Button>
 
                 <form className={hide} onSubmit={handleSubmit}>
@@ -149,6 +150,8 @@ const WineInfo = ({ wineData, brand, location, onUpdateItem }) => {
                     <Button onClick={handleDelete} >Delete</Button>
                 </form>
             </div>
+        :null }
+    
             <h1 className="headers">Wine Info</h1>
             <div className="wine-info">
                 <h3>{wine.name}</h3>

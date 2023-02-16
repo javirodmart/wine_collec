@@ -4,11 +4,13 @@ import Header from './components/Header';
 import { Route, Switch,useParams,useHistory } from 'react-router-dom';
 import AllWines from './components/AllWines';
 import AllBrands from './components/AllBrands'
+import AllLocations from './components/AllLocation';
 import AddWine from './components/AddWine';
 import AddBrand from './components/AddBrand';
 import AddLocation from './components/AddLocation';
 import WineInfo from './components/WineInfo';
 import BrandInfo from './components/BrandInfo';
+import LocationInfo from './components/LocationInfo';
 import SignUp from './components/Signup';
 import Login from './components/Login';
 import GuestHeader from './components/GuestHeader';
@@ -61,21 +63,20 @@ function App() {
   const updateUser = (user) => setUser(user)
 
   const handelNewWine = (addNewWine) => {
+    const newWine = wine.filter((wines)=>{
+     return wines.name !== addNewWine.name
+    })
     setWine({ ...wine, addNewWine })
   }
 
   const handelNewBrand = (addNewBrand) => {
     setBrand({ ...brand, addNewBrand })
   }
-  const handelUpdatedWine = (updateWine) => {
-    setWine({ ...wine, updateWine })
+
+  const handelNewLocation = (addNewLocation) => {
+    setLocation({ ...location, addNewLocation })
   }
-  // const handelUpdateWine = (wineUpdate)=> setWine{}
-
-  // const updatedWine = {...wine}
-  // updatedWine = wine.map((wines) => wines.id === wineUpdate.id ? wineUpdate : wines)
-  // setWine(updatedWine)
-
+ 
   function handleUpdateItem(updatedItem) {
     const updatedItems = wine.map((item) => {
       if (item.id === updatedItem.id) {
@@ -132,10 +133,13 @@ function deleteBrand(deleteBrand) {
             <Dashboard user={user}/>
           </Route>
           <Route path="/all_wines">
-            <AllWines admin={admin} user={user} wine={wine} />
+            <AllWines handelNewWine={handelNewWine} admin={admin} user={user} wine={wine} />
           </Route>
           <Route path="/all_brands">
             <AllBrands user={user} brand={brand} deleteBrand={deleteBrand} />
+          </Route>
+          <Route path="/all_locations">
+            <AllLocations user={user} location={location} handelNewLocation={handelNewLocation} />
           </Route>
           <Route path="/add_wine">
             <AddWine wine={wine} brand={brand} location={location} deleteWine={deleteWine} handelNewWine={handelNewWine} />
@@ -144,13 +148,16 @@ function deleteBrand(deleteBrand) {
             <AddBrand wine={wine} brand={brand} location={location} deleteWine={deleteWine} handelNewBrand={handelNewBrand} />
           </Route>
           <Route path="/add_location">
-            <AddLocation wine={wine} brand={brand} location={location} deleteWine={deleteWine} handelNewWine={handelNewWine} />
+            <AddLocation brand={brand} location={location} deleteWine={deleteWine} handelNewWine={handelNewWine} />
           </Route>
           <Route path="/wine-info/:id">
-            <WineInfo wineData={wine} brand={brand} location={location} onUpdateItem={handleUpdateItem} />
+            <WineInfo wineData={wine}  user={user} brand={brand} location={location} onUpdateItem={handleUpdateItem} />
           </Route>
           <Route path="/brand-info/:id">
-            <BrandInfo BranData={wine} brand={brand} location={location} deleteBrand={deleteBrand} onUpdateItem={handleUpdateItem} />
+            <BrandInfo BranData={wine} brand={brand} user={user} location={location} deleteBrand={deleteBrand} onUpdateItem={handleUpdateItem} />
+          </Route>
+          <Route path="/location-info/:id">
+            <LocationInfo BranData={wine} brand={brand} user={user} location={location} deleteBrand={deleteBrand} onUpdateItem={handleUpdateItem} />
           </Route>
         </Switch>
     </>)
