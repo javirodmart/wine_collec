@@ -17,7 +17,7 @@ const MyWine = ({ id, name, image, vintage, deleteWine, user }) => {
     
 
     const handleDelete = () => {
-        fetch(`wines/${id}`, {
+        fetch(`my_wines/${id}`, {
             method: "DELETE"
         })
         deleteWine(id)
@@ -33,9 +33,9 @@ const MyWine = ({ id, name, image, vintage, deleteWine, user }) => {
                     {isVintage}
                 </Card.Text>
                 
-                {user.admin ? <Button onClick={handleDelete} >Delete</Button> : null}
+                <Button onClick={handleDelete} > <i class="fa fa-trash-o"></i> </Button> 
 
-                <Link to={`/wine-info/${id}`}> <Button > More Info</Button></Link>
+                <Link to={`/wine-info/${id}`}> <Button > <i class="fa fa-info-circle" style={{fontsize: + "36px"}}></i> </Button></Link>
                 {/* <WineInfo className="hide-wine-card" wineData={wineData} /> */}
             </Card.Body>
         </div>

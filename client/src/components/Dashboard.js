@@ -11,11 +11,16 @@ const Dashboard = (user) => {
             .then(data => (console.log(data), setMyWine(data)))
 
     }, [])
-    
+    function deleteWine(deleteWine) {
+        const updatedArray = myWine.filter((wines) => {
+            return wines.id !== deleteWine
+        })
+        setMyWine(updatedArray)
+    }
 
     const wineArray = myWine.map((wine) => {
         
-        return <MyWine user={user} key={wine.id}
+        return <MyWine user={user} key={wine.id} deleteWine={deleteWine}
             id={wine.id}
             name={wine.name}
             vintage={wine.vintage}

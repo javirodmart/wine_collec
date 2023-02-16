@@ -49,7 +49,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // auto-login
     fetch("/authorized_user").then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user),setAdmin(user.admin));
