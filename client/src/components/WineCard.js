@@ -64,9 +64,9 @@ const WineCard = ({ id, name, vintage, image, blend, flavor_profile, description
                     {isVintage}
                 </Card.Text>
 
-                {user.admin ? <Button onClick={handleDelete} ><i class="fa fa-trash-o"></i></Button> : null}
+                {user.admin ? <Button onClick={handleDelete} > <i class="fa fa-trash-o"></i> </Button> : null}
 
-                <Link to={`/wine-info/${id}`}> <Button><i class="fa fa-info-circle" style={{fontsize: + "36px"}}></i></Button></Link>
+                <Link to={`/wine-info/${id}`}> <Button> <i class="fa fa-info-circle" style={{fontsize: + "36px"}}></i> </Button></Link>
                 <Link /* to={`/dashboard/${user.id}/`}*/ > <Button onClick={handleAdd} > <i class="fa fa-plus" style={{fontsize: + "36px"}}></i> </Button></Link>
                 {/* <WineInfo className="hide-wine-card" wineData={wineData} /> */}
             </Card.Body>

@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Container, Navbar, Nav, NavItem, Button } from "react-bootstrap";
 import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
-import { NavLink , useHistory} from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-const Header = ({user,updateUser}) => {
+const Header = ({ user, updateUser }) => {
     const history = useHistory()
     const navInfo = [
         {
@@ -12,18 +12,18 @@ const Header = ({user,updateUser}) => {
             path: `/dashboard/${user.id}`,
             name: 'Home'
         },
-         {
-            id:2,
+        {
+            id: 2,
             path: `/all_wines`,
             name: 'Wines'
         },
         {
-            id:3,
+            id: 3,
             path: "/all_brands",
             name: "Brand"
         },
         {
-            id:3,
+            id: 3,
             path: "/all_locations",
             name: "Location"
         }
@@ -32,17 +32,17 @@ const Header = ({user,updateUser}) => {
 
     const handleLogOut = () => {
         // DELETE `/logout`
-        fetch('/logout',{
-          method:'DELETE'
+        fetch('/logout', {
+            method: 'DELETE'
         })
-        .then(res =>{
-          if(res.ok){
-            updateUser(null)
-            history.push('/login')
-          }
-        })
+            .then(res => {
+                if (res.ok) {
+                    updateUser(null)
+                    history.push('/login')
+                }
+            })
         updateUser(null)
-      }
+    }
     return (<>
         <Navbar collapseOnSelect expand="lg" className="navbar" variant="dark">
             <Container>
@@ -62,7 +62,11 @@ const Header = ({user,updateUser}) => {
                                 </Nav.Item>
                             </>
                         ))}
-                        <button className="logout" onClick={handleLogOut}>Sign Out</button>
+                        <Nav.Item  className="nav-link">
+                            <NavLink className="nav-link" to="">
+                                <Button className="logout" style={{color:"black"}} onClick={handleLogOut}>Sign Out</Button>
+                            </NavLink>
+                        </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

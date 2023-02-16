@@ -23,8 +23,8 @@ const BrandCard = ({ id,user ,name, image, est, deleteBrand }) => {
                 <Card.Text>
                     {est}
                 </Card.Text>
-                {user.admin ? <Button onClick={handleDelete} >Delete</Button> : null }
-               <Link to={`/brand-info/${id}`}> <Button> More Info</Button></Link>
+                {user.admin ? <Button onClick={handleDelete} > <i class="fa fa-trash-o"></i> </Button> : null }
+               <Link to={`/brand-info/${id}`}> <Button> <i class="fa fa-info-circle" style={{fontsize: + "36px"}}></i> </Button></Link>
             </Card.Body>
         </div>
     )
