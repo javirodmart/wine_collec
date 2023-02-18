@@ -8,9 +8,14 @@ const Header = ({ user, updateUser }) => {
     const history = useHistory()
     const navInfo = [
         {
+            id: 5,
+            path: `/home/${user.id}`,
+            name: "Home"
+        },
+        {
             id: 1,
             path: `/dashboard/${user.id}`,
-            name: 'Home'
+            name: 'Cellar'
         },
         {
             id: 2,
@@ -20,15 +25,16 @@ const Header = ({ user, updateUser }) => {
         {
             id: 3,
             path: "/all_brands",
-            name: "Brand"
+            name: "Brands"
         },
         {
-            id: 3,
+            id: 4,
             path: "/all_locations",
-            name: "Location"
-        }
+            name: "Region"
+        },
+        
     ]
-
+    console.log(user.img_url)
 
     const handleLogOut = () => {
         // DELETE `/logout`
@@ -62,9 +68,9 @@ const Header = ({ user, updateUser }) => {
                                 </Nav.Item>
                             </>
                         ))}
-                        <Nav.Item  className="nav-link">
+                        <Nav.Item className="nav-link">
                             <NavLink className="nav-link" to="">
-                                <Button className="logout" style={{color:"black"}} onClick={handleLogOut}>Sign Out</Button>
+                                <Button className="logout" style={{ color: "black" }} onClick={handleLogOut}>Sign Out</Button>
                             </NavLink>
                         </Nav.Item>
                     </Nav>

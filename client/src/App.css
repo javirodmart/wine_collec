@@ -243,3 +243,14 @@ textarea{
 .off {
   color: #ccc !important;
 }
+
+.user-img{
+  border-radius:50% ;
+}
+.user-header{
+  width: fit-content;
+  position: absolute;
+  top: 12%;
+  left: 10%;
+}
+

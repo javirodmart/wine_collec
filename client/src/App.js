@@ -15,6 +15,7 @@ import SignUp from './components/Signup';
 import Login from './components/Login';
 import GuestHeader from './components/GuestHeader';
 import Dashboard from './components/Dashboard';
+import Home from './components/Home';
 const UserContext = React.createContext;
 
 function App() {
@@ -58,7 +59,7 @@ function App() {
     }
     });
   }, []);
-  
+
   const updateUser = (user) => setUser(user)
 
   const handelNewWine = (addNewWine) => {
@@ -128,6 +129,9 @@ function deleteBrand(deleteBrand) {
     <>
         <Header user={user} updateUser={updateUser} setUser={setUser} />
         <Switch>
+        <Route path="/home/:id">
+            <Home user={user}/>
+          </Route>
           <Route path="/dashboard/:id">
             <Dashboard user={user}/>
           </Route>

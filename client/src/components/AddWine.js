@@ -47,7 +47,7 @@ const AddWine = ({ wine, brand, location, handelNewWine, }) => {
             })
             setId(NewWine.id)
     }
-console.log(id)
+console.log(location)
     
     function handleHide(){
         setHide("new-wine-card")
@@ -99,7 +99,7 @@ console.log(id)
                     <option value="">Select Location...</option>
                     {location.map((locations) => (
                         <option key={locations.id} value={locations.id}>
-                            {locations.state}
+                            {locations.region}
                         </option>
                     ))}
                 </select>

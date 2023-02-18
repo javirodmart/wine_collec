@@ -12,6 +12,7 @@ const WineCard = ({ id, name, vintage, image, blend, flavor_profile, description
     const [wineData, setWineData] = useState([])
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
+    const [add, setAdd] = useState(false)
     const [formData, setFormData] = useState({
         name: name,
         vintage: vintage,
@@ -27,7 +28,7 @@ const WineCard = ({ id, name, vintage, image, blend, flavor_profile, description
     if (isVintage === 0) {
         setIsVintage("Not Vintage")
     }
-
+    
     const handleAdd = (e) => {
         e.preventDefault()
         const NewWine = formData
@@ -40,7 +41,7 @@ const WineCard = ({ id, name, vintage, image, blend, flavor_profile, description
         })
             .then(res => {
                 if (res.ok) {
-                    res.json().then((data) => (handleNewWine(data)))
+                    res.json().then((data) => (setAdd(true)))
                 } else {
                 }
             })
@@ -64,6 +65,7 @@ const WineCard = ({ id, name, vintage, image, blend, flavor_profile, description
                     {isVintage}
                 </Card.Text>
 
+                {add ? <p> &#10004;</p> : null}
                 {user.admin ? <Button onClick={handleDelete} > <i class="fa fa-trash-o"></i> </Button> : null}
 
                 <Link to={`/wine-info/${id}`}> <Button> <i class="fa fa-info-circle" style={{fontsize: + "36px"}}></i> </Button></Link>
