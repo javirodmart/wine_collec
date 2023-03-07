@@ -41,7 +41,7 @@ const WineCard = ({ id, name, vintage, image, blend, flavor_profile, description
         })
             .then(res => {
                 if (res.ok) {
-                    res.json().then((data) => (setAdd(true)))
+                    res.json().then((data) => (console.log(data)))
                 } else {
                 }
             })
